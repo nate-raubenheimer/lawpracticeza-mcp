@@ -1,0 +1,15 @@
+---
+description: Keep project documentation thorough and consistent with the code.
+alwaysApply: true
+---
+
+# Documentation
+
+When you add or change behaviour, update the matching docs in the same change.
+
+- `README.md` — purpose, run commands, env vars, current MCP tools, limits.
+- `AGENTS.md` — agent-facing conventions (this file’s siblings, Linear, secrets).
+- Code comments — non-obvious API quirks only (auth, confirm gates, schema merge).
+- Do not leave README tool lists or env tables out of date.
+
+There is no live LawPracticeZA access until credentials exist. Say so wherever a reader might assume live calls.

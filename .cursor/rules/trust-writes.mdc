@@ -1,0 +1,21 @@
+---
+description: Do not invent undocumented LawPracticeZA trust or investment write APIs.
+alwaysApply: true
+---
+
+# No invented trust-write APIs
+
+The published LawPracticeZA guide covers fees, invoices, and accounting reads. Trust/investment **writes** are not documented.
+
+## Allowed
+
+- Documented reads such as `statement2` / `balances`.
+- `lpza_api_call` (APP-134) as an escape hatch for a caller-supplied `object`/`method`.
+- Curated tools that map 1:1 onto the API guide / schema.
+
+## Forbidden
+
+- Helpers named or described as trust receipt, trust transfer, or investment **write** unless the official guide documents that `object`/`method`.
+- Guessing field names, VAT rates (do not hardcode 14% or 15%), or undocumented endpoints from the vendor UI.
+
+If a user asks for an undocumented write, refuse to invent it; point them at `lpza_api_call` once it exists, or at the [API guide](https://lawpracticeza.com/docs/api_guide.html).

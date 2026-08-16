@@ -1,0 +1,28 @@
+---
+description: After finishing a Linear issue, set its status to In Review (never Done).
+alwaysApply: true
+---
+
+# Linear issue status after work
+
+When you finish the work for a Linear issue in this repo, set that issue to **In Review**. Do not leave it In Progress. Do not mark it Done.
+
+## When this applies
+
+- The issue’s acceptance criteria are met (or you have a PR / commit that implements the scoped work).
+- You are wrapping up the session for that issue.
+
+## How
+
+Use the Linear MCP `save_issue` tool (or the Linear UI/CLI if MCP is unavailable):
+
+- `id`: the issue identifier (e.g. `APP-130`)
+- `state`: `In Review`
+
+Apps team status names: Backlog, Todo, In Progress, **In Review**, Done.
+
+## Do not
+
+- Mark the issue **Done** (a human reviews first).
+- Move a different issue, or a parent epic, unless that was the work you completed.
+- Skip the status update because the branch is unpushed. Update Linear when the work is complete in the working tree / PR.

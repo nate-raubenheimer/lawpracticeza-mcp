@@ -1,0 +1,45 @@
+{
+  "name": "lawpracticeza-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for LawPracticeZA — South African legal practice software.",
+  "license": "GPL-3.0-only",
+  "type": "module",
+  "private": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nate-raubenheimer/lawpracticeza-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nate-raubenheimer/lawpracticeza-mcp/issues"
+  },
+  "homepage": "https://github.com/nate-raubenheimer/lawpracticeza-mcp#readme",
+  "keywords": [
+    "mcp",
+    "lawpracticeza",
+    "legal",
+    "south-africa"
+  ],
+  "files": [
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/stdio.test.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "^2.0.0",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

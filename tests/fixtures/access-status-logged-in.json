@@ -1,0 +1,23 @@
+{
+  "signon_uid": null,
+  "pincode": null,
+  "freezedate": "2016-12-12",
+  "zones": ",legal,salesagent,allmatters,bookkeeper,loginmanager,auditor",
+  "activationdate": null,
+  "sessiontimeout": 315360000,
+  "login_uid": "LGN_SYS_1_20713181404328",
+  "tagcode": null,
+  "archived": 0,
+  "loggedin": true,
+  "database": "vuka",
+  "stampdate": "2017-11-05 12:38:10",
+  "rev": 0,
+  "login_code": "apiuser",
+  "email": "blackhole@lawpracticeza.c",
+  "token": "46f39732-1bcb-49bd-b2a2-607032b792c3",
+  "points": 0,
+  "gravatar": "9eaf01cc480ccf661edb3f92645ecaca",
+  "activationcode": null,
+  "sessiontimeupdated": true,
+  "login_name": "API User"
+}

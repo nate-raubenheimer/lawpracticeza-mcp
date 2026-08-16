@@ -30,7 +30,7 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/stdio.test.ts"
+    "test": "tsx --test tests/*.test.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "^2.0.0",

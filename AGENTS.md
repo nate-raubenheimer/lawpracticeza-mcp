@@ -20,7 +20,7 @@ Package manager is **npm**. Node 20+. Official MCP SDK v2 (`@modelcontextprotoco
 | --- | --- |
 | `src/index.ts` | stdio entry (`serveStdio`) |
 | `src/server.ts` | `createServer()` factory |
-| `src/lpza/` | HTTP client (stub until APP-131) |
+| `src/lpza/` | HTTP client (`LpzaClient`, auth, errors, schema types) |
 | `src/tools/` | MCP tools |
 | `tests/fixtures/` | API-guide JSON (later tickets) |
 

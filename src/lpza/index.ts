@@ -1,25 +1,50 @@
 /**
- * LawPracticeZA HTTP client — stub.
- *
- * APP-131 implements `LpzaClient`: form-urlencoded POST to
+ * LawPracticeZA HTTP client — form-urlencoded POST to
  * `{base}/api/{object}/{method}/{positional…}`, `access.login`, `X-token`,
  * and a single re-login on HTTP 403.
  *
- * Required env (later; do not log or commit values):
+ * Required env for live calls (do not log or commit values):
  * - `LPZA_DATABASE`
  * - `LPZA_LOGIN_CODE`
  * - `LPZA_PASSWORD`
  * - `LPZA_BASE_URL` (optional, default `https://lawpracticeza.com/api`)
  *
- * There is no live LawPracticeZA access in this bootstrap. Do not invent
- * trust/investment write helpers; those are undocumented.
+ * MCP tools do not call LawPracticeZA yet. Use fixture-backed tests without
+ * live credentials.
  */
 
-export const DEFAULT_LPZA_BASE_URL = 'https://lawpracticeza.com/api';
-
-export const LPZA_ENV = {
-  database: 'LPZA_DATABASE',
-  loginCode: 'LPZA_LOGIN_CODE',
-  password: 'LPZA_PASSWORD',
-  baseUrl: 'LPZA_BASE_URL',
-} as const;
+export {
+  LpzaAuth,
+  LPZA_ENV,
+  credentialsFromEnv,
+  type LpzaAuthRequest,
+  type LpzaCredentials,
+} from './auth.js';
+export {
+  LpzaClient,
+  DEFAULT_LPZA_BASE_URL,
+  type FetchFn,
+  type LpzaClientOptions,
+  type LpzaCallOptions,
+} from './client.js';
+export {
+  LpzaError,
+  LpzaValidationError,
+  LpzaServerError,
+  LpzaAuthError,
+  mapLpzaResponse,
+} from './errors.js';
+export type {
+  AccessStatus,
+  AccessStatusLoggedIn,
+  AccessStatusLoggedOut,
+  BankAccount,
+  BankAccountBticode,
+  Customer,
+  LoginResponse,
+  Matter,
+  MatterDraftLineItem,
+  MatterDraftLineItemStatus,
+  Product,
+  ProductCategory,
+} from './types.js';

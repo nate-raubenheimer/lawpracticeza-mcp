@@ -9,8 +9,8 @@
  * - `LPZA_PASSWORD`
  * - `LPZA_BASE_URL` (optional, default `https://lawpracticeza.com/api`)
  *
- * MCP tools do not call LawPracticeZA yet. Use fixture-backed tests without
- * live credentials.
+ * MCP write tools call LawPracticeZA when LPZA_* env vars are set. Use
+ * fixture-backed tests without live credentials.
  */
 
 export {
@@ -40,11 +40,18 @@ export type {
   AccessStatusLoggedOut,
   BankAccount,
   BankAccountBticode,
+  ChildListResponse,
+  CreateTransferResponse,
   Customer,
+  DetailResponse,
+  InsertResponse,
   LoginResponse,
   Matter,
   MatterDraftLineItem,
   MatterDraftLineItemStatus,
   Product,
   ProductCategory,
+  QuickDeleteResponse,
+  UpdateResponse,
+  UpsertDraftFeeResponse,
 } from './types.js';

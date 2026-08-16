@@ -30,6 +30,8 @@ test('stdio server advertises lpza_ping and write tools', async () => {
   assert.ok(names.includes('lpza_ping'), 'expected lpza_ping');
   assert.ok(names.includes('lpza_create_client'), 'expected lpza_create_client');
   assert.ok(names.includes('lpza_delete_draft_fee'), 'expected lpza_delete_draft_fee');
+  assert.ok(names.includes('lpza_bill_matter'), 'expected lpza_bill_matter');
+  assert.ok(names.includes('lpza_send_invoice'), 'expected lpza_send_invoice');
 });
 
 test('lpza_ping reports no live API', async () => {

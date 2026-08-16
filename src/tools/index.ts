@@ -1,12 +1,14 @@
 import type { McpServer } from '@modelcontextprotocol/server';
 
 import type { LpzaClient } from '../lpza/client.js';
+import { registerBillMatterTool } from './bill-matter.js';
 import { registerCreateClientTool } from './create-client.js';
 import { registerCreateMatterTool } from './create-matter.js';
 import { registerCreateTransferTool } from './create-transfer.js';
 import { registerDeleteDraftFeeTool } from './delete-draft-fee.js';
 import { registerListUnbilledTool } from './list-unbilled.js';
 import { registerPingTool } from './ping.js';
+import { registerSendInvoiceTool } from './send-invoice.js';
 import { registerUpdateMatterTool } from './update-matter.js';
 import { registerUpsertDraftFeeTool } from './upsert-draft-fee.js';
 
@@ -23,6 +25,8 @@ export function registerTools(server: McpServer, client?: LpzaClient): void {
   registerListUnbilledTool(server, client);
   registerUpsertDraftFeeTool(server, client);
   registerDeleteDraftFeeTool(server, client);
+  registerBillMatterTool(server, client);
+  registerSendInvoiceTool(server, client);
 }
 
 /** @deprecated Use registerTools */

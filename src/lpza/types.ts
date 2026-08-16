@@ -241,3 +241,15 @@ export interface UpsertDraftFeeResponse {
 export interface QuickDeleteResponse {
   numdeleted: number;
 }
+
+/** `matter.bill` success payload */
+export interface BillResponse {
+  what: string;
+  uid: string;
+}
+
+/** Enriched `matter.bill` result with invoice web and PDF URLs */
+export interface BillMatterResult extends BillResponse {
+  salesinvoice_detail_url: string;
+  salesinvoice_pdf_url: string;
+}

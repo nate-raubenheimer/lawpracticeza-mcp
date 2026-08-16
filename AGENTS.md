@@ -44,4 +44,4 @@ There is **no live LawPracticeZA access** until credentials are configured (`LPZ
 
 ## VAT and writes
 
-Do not hardcode 14% or 15% VAT. Confirm gates (`confirm: true`) are required for bill, send, and quickdelete when those tools exist.
+Do not hardcode 14% or 15% VAT. Confirm gates (`confirm: true`) are required for bill, send, and quickdelete.

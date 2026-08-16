@@ -71,8 +71,10 @@ The script calls `access.login` and `access.status` and prints only non-sensitiv
 | `lpza_list_unbilled` | `matterdraftlineitem.childlist` | WIP draft fees for a matter |
 | `lpza_upsert_draft_fee` | `matterdraftlineitem.upsert` | Caller supplies `unitprice` / `tax` / `trantotal` |
 | `lpza_delete_draft_fee` | `matterdraftlineitem.quickdelete` | Requires `confirm: true` |
+| `lpza_bill_matter` | `matter.bill` | Bill specific items or all unbilled; requires `confirm: true`; returns invoice detail and PDF URLs |
+| `lpza_send_invoice` | `salesinvoice.send` | Email invoice to debtor; requires `confirm: true` |
 
-Planned (not in this release): session/lookup reads, billing with confirm gates, accounting reads, and `lpza_api_call`.
+Planned (not in this release): session/lookup reads, accounting reads, and `lpza_api_call`.
 
 ## Development
 

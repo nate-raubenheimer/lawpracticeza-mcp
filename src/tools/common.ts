@@ -67,3 +67,18 @@ export function jsonToolResult(data: unknown): {
     content: [{ type: 'text', text: JSON.stringify(data) }],
   };
 }
+
+/** LawPracticeZA web UI base for sales invoice links (not the API base URL). */
+export const LPZA_SALESINVOICE_WEB_BASE =
+  'https://lawpracticeza.com/salesinvoice';
+
+/** Build detail and PDF URLs for a sales invoice uid per the API guide. */
+export function salesInvoiceUrls(uid: string): {
+  salesinvoice_detail_url: string;
+  salesinvoice_pdf_url: string;
+} {
+  return {
+    salesinvoice_detail_url: `${LPZA_SALESINVOICE_WEB_BASE}/detail/${uid}`,
+    salesinvoice_pdf_url: `${LPZA_SALESINVOICE_WEB_BASE}/servepdf/${uid}`,
+  };
+}

@@ -7,8 +7,10 @@ import { LpzaClient, type FetchFn } from '../src/lpza/index.js';
 import { createClient } from '../src/tools/create-client.js';
 import { createMatter } from '../src/tools/create-matter.js';
 import { createTransfer } from '../src/tools/create-transfer.js';
+import { billMatter, handleBillMatter } from '../src/tools/bill-matter.js';
 import { deleteDraftFee, handleDeleteDraftFee } from '../src/tools/delete-draft-fee.js';
 import { listUnbilled } from '../src/tools/list-unbilled.js';
+import { handleSendInvoice, sendInvoice } from '../src/tools/send-invoice.js';
 import { updateMatter } from '../src/tools/update-matter.js';
 import { upsertDraftFee } from '../src/tools/upsert-draft-fee.js';
 
@@ -27,6 +29,9 @@ const createTransferResponse = readFixture('matterset-createtransfer-response.js
 const childListResponse = readFixture('matterdraftlineitem-childlist-response.json');
 const upsertResponse = readFixture('matterdraftlineitem-upsert-response.json');
 const quickDeleteResponse = readFixture('matterdraftlineitem-quickdelete-response.json');
+const billItemsResponse = readFixture('matter-bill-items-response.json');
+const billAllResponse = readFixture('matter-bill-all-response.json');
+const sendInvoiceResponse = readFixture('salesinvoice-send-response.json');
 
 const credentials = {
   database: 'VUKA',
@@ -293,6 +298,87 @@ test('lpza_delete_draft_fee refuses without confirm: true', async () => {
   const result = await handleDeleteDraftFee(client, {
     confirm: false,
     srcid: '67424',
+  });
+  assert.ok('isError' in result && result.isError === true);
+  const body = JSON.parse(result.content[0]?.text ?? '{}') as { error: string };
+  assert.match(body.error, /confirm: true/);
+});
+
+test('lpza_bill_matter bills specific items with fixture response and invoice URLs', async () => {
+  const matterId = 'MTR_API_1_61355827191366';
+  const url = `${base}/matter/bill/${matterId}`;
+  const { client } = createTestClient({
+    [url]: (req) => {
+      assert.ok(req.body.includes('matterdraftlineitems=%5B%2213%22%5D'));
+      return new Response(JSON.stringify(billItemsResponse), { status: 200 });
+    },
+  });
+
+  const result = await billMatter(client, {
+    matter_id: matterId,
+    matterdraftlineitems: '["13"]',
+  });
+
+  assert.equal(result.what, 'salesinvoice');
+  assert.equal(result.uid, 'SI__API_1_5797205714080');
+  assert.equal(
+    result.salesinvoice_detail_url,
+    'https://lawpracticeza.com/salesinvoice/detail/SI__API_1_5797205714080',
+  );
+  assert.equal(
+    result.salesinvoice_pdf_url,
+    'https://lawpracticeza.com/salesinvoice/servepdf/SI__API_1_5797205714080',
+  );
+});
+
+test('lpza_bill_matter bills all unbilled items with all=1', async () => {
+  const matterId = 'MTR_API_1_61355827191366';
+  const url = `${base}/matter/bill/${matterId}`;
+  const { client } = createTestClient({
+    [url]: (req) => {
+      assert.ok(req.body.includes('all=1'));
+      return new Response(JSON.stringify(billAllResponse), { status: 200 });
+    },
+  });
+
+  const result = await billMatter(client, {
+    matter_id: matterId,
+    all: true,
+  });
+
+  assert.equal(result.uid, 'SI__ADM_1_13587111593649');
+  assert.ok(result.salesinvoice_detail_url.includes(result.uid));
+  assert.ok(result.salesinvoice_pdf_url.includes(result.uid));
+});
+
+test('lpza_bill_matter refuses without confirm: true', async () => {
+  const { client } = createTestClient({});
+  const result = await handleBillMatter(client, {
+    confirm: false,
+    matter_id: 'MTR_API_1_61355827191366',
+    all: true,
+  });
+  assert.ok('isError' in result && result.isError === true);
+  const body = JSON.parse(result.content[0]?.text ?? '{}') as { error: string };
+  assert.match(body.error, /confirm: true/);
+});
+
+test('lpza_send_invoice maps to salesinvoice.send with null fixture response', async () => {
+  const uid = 'SI__API_1_5797205714080';
+  const url = `${base}/salesinvoice/send/${uid}`;
+  const { client } = createTestClient({
+    [url]: () => new Response('null', { status: 200 }),
+  });
+
+  const result = await sendInvoice(client, { salesinvoice_uid: uid });
+  assert.equal(result, sendInvoiceResponse);
+});
+
+test('lpza_send_invoice refuses without confirm: true', async () => {
+  const { client } = createTestClient({});
+  const result = await handleSendInvoice(client, {
+    confirm: false,
+    salesinvoice_uid: 'SI__API_1_5797205714080',
   });
   assert.ok('isError' in result && result.isError === true);
   const body = JSON.parse(result.content[0]?.text ?? '{}') as { error: string };

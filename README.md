@@ -43,6 +43,24 @@ Live API calls from **MCP tools** are **not implemented** in this version. The H
 
 Copy `.env.example` to `.env` for local values. Never commit credentials.
 
+### Cloud Agent / CI secrets
+
+For live verification in Cursor Cloud Agents, add these as **environment secrets** (not committed files):
+
+| Secret name | Value |
+| --- | --- |
+| `LPZA_DATABASE` | MS&B Inc firm code / database name |
+| `LPZA_LOGIN_CODE` | Bookkeeper API user login code |
+| `LPZA_PASSWORD` | API password |
+
+Once secrets are configured, run:
+
+```sh
+npm run verify:login
+```
+
+The script calls `access.login` and `access.status` and prints only non-sensitive fields (database name, login name). It exits non-zero when credentials are missing or login fails.
+
 ## Current MCP tools
 
 | Tool | Status |
@@ -56,6 +74,7 @@ Planned tools (not in this release): session/lookups, clients/matters, WIP/billi
 ```sh
 npm run typecheck
 npm test
+npm run verify:login   # requires LPZA_* env; see README
 ```
 
 CI runs typecheck and tests on push and pull request to `main`.

@@ -1,6 +1,7 @@
 import type { McpServer } from '@modelcontextprotocol/server';
 
 import type { LpzaClient } from '../lpza/client.js';
+import { registerApiCallTool } from './api-call.js';
 import { registerCreateClientTool } from './create-client.js';
 import { registerCreateMatterTool } from './create-matter.js';
 import { registerCreateTransferTool } from './create-transfer.js';
@@ -23,6 +24,7 @@ export function registerTools(server: McpServer, client?: LpzaClient): void {
   registerListUnbilledTool(server, client);
   registerUpsertDraftFeeTool(server, client);
   registerDeleteDraftFeeTool(server, client);
+  registerApiCallTool(server, client);
 }
 
 /** @deprecated Use registerTools */

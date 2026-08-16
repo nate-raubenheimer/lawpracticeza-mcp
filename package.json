@@ -30,7 +30,8 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "verify:login": "tsx scripts/verify-login.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "^2.0.0",

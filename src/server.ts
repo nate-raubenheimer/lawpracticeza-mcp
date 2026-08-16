@@ -1,13 +1,12 @@
 import { McpServer } from '@modelcontextprotocol/server';
 
 import { SERVER_NAME, SERVER_VERSION } from './meta';
-import { registerPlaceholderTools } from './tools/index';
+import { registerTools } from './tools/index';
 
 export { SERVER_NAME, SERVER_VERSION };
 
 /**
- * Build an MCP server instance. The HTTP client and curated tools land in
- * later tickets; this factory is the stdio/HTTP-ready surface.
+ * Build an MCP server instance with curated read tools and bootstrap helpers.
  */
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -15,6 +14,6 @@ export function createServer(): McpServer {
     version: SERVER_VERSION,
   });
 
-  registerPlaceholderTools(server);
+  registerTools(server);
   return server;
 }

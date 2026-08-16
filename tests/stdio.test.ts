@@ -24,11 +24,43 @@ after(async () => {
   await client.close();
 });
 
-test('stdio server advertises lpza_ping', async () => {
+test('stdio server advertises lpza_ping and read tools', async () => {
   const { tools } = await client.listTools();
   const ping = tools.find((tool) => tool.name === 'lpza_ping');
   assert.ok(ping, 'expected lpza_ping to be registered');
   assert.match(ping.description ?? '', /does not call/i);
+
+  const readToolNames = [
+    'lpza_status',
+    'lpza_firm_details',
+    'lpza_list_departments',
+    'lpza_list_fee_earners',
+    'lpza_list_posting_codes',
+    'lpza_list_clients',
+    'lpza_get_client',
+    'lpza_list_matters',
+    'lpza_get_matter',
+    'lpza_matter_balances',
+    'lpza_matter_statement',
+    'lpza_matter_business_entries',
+  ];
+  for (const name of readToolNames) {
+    assert.ok(
+      tools.some((tool) => tool.name === name),
+      `expected ${name} to be registered`,
+    );
+  }
+});
+
+test('lpza_status without credentials reports credentials_missing', async () => {
+  const result = await client.callTool({ name: 'lpza_status', arguments: {} });
+  assert.equal(result.isError, true);
+  const text = result.content
+    .filter((block) => block.type === 'text')
+    .map((block) => (block.type === 'text' ? block.text : ''))
+    .join('');
+  const body = JSON.parse(text) as { error: string };
+  assert.equal(body.error, 'credentials_missing');
 });
 
 test('lpza_ping reports no live API', async () => {

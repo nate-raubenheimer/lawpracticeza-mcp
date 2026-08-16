@@ -21,7 +21,7 @@ Package manager is **npm**. Node 20+. Official MCP SDK v2 (`@modelcontextprotoco
 | `src/index.ts` | stdio entry (`serveStdio`) |
 | `src/server.ts` | `createServer()` factory |
 | `src/lpza/` | HTTP client (`LpzaClient`, auth, errors, schema types) |
-| `src/tools/` | MCP tools |
+| `src/tools/` | MCP tools (`lpza_ping`, curated read tools) |
 | `tests/fixtures/` | API-guide JSON (later tickets) |
 
 ## Rules (also in `.cursor/rules/`)
@@ -40,7 +40,7 @@ Package manager is **npm**. Node 20+. Official MCP SDK v2 (`@modelcontextprotoco
 | `LPZA_PASSWORD` | yes | API password |
 | `LPZA_BASE_URL` | no | Default `https://lawpracticeza.com/api` |
 
-There is **no live LawPracticeZA access** in this bootstrap. Do not call the API until APP-131 + credentials (APP-136).
+There is **no live LawPracticeZA access** in CI. Read MCP tools call the API when `LPZA_*` credentials are configured; otherwise they return `credentials_missing`.
 
 ## VAT and writes
 

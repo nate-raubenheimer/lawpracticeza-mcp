@@ -1,13 +1,13 @@
 import { McpServer } from '@modelcontextprotocol/server';
 
+import { credentialsFromEnv, LpzaClient, DEFAULT_LPZA_BASE_URL } from './lpza/index.js';
 import { SERVER_NAME, SERVER_VERSION } from './meta';
-import { registerPlaceholderTools } from './tools/index';
+import { registerTools } from './tools/index.js';
 
 export { SERVER_NAME, SERVER_VERSION };
 
 /**
- * Build an MCP server instance. The HTTP client and curated tools land in
- * later tickets; this factory is the stdio/HTTP-ready surface.
+ * Build an MCP server instance with curated LawPracticeZA tools.
  */
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -15,6 +15,14 @@ export function createServer(): McpServer {
     version: SERVER_VERSION,
   });
 
-  registerPlaceholderTools(server);
+  const credentials = credentialsFromEnv();
+  const client = credentials
+    ? new LpzaClient({
+        credentials,
+        baseUrl: process.env.LPZA_BASE_URL ?? DEFAULT_LPZA_BASE_URL,
+      })
+    : undefined;
+
+  registerTools(server, client);
   return server;
 }

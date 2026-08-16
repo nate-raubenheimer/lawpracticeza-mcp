@@ -1,0 +1,15 @@
+{
+  "data": {
+    "matter_id": "MTR_SYS_1_76799379571032",
+    "matter_code": "MTR/001",
+    "matter_name": "Original matter name",
+    "customer_id": "CUST_API_1_39321029271287",
+    "owner_salesagent_id": "SA__SYS_1_12291091625556",
+    "department_id": "DEPT__SYS_1_24294194765458",
+    "dateopened": "2017-11-13",
+    "stampdate": "2017-11-13 10:00:00",
+    "scrapdate": "9999-12-31 23:59:59",
+    "login_uid": "LGN_SYS_1_20713181404328",
+    "rev": 0
+  }
+}

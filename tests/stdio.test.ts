@@ -24,11 +24,12 @@ after(async () => {
   await client.close();
 });
 
-test('stdio server advertises lpza_ping', async () => {
+test('stdio server advertises lpza_ping and write tools', async () => {
   const { tools } = await client.listTools();
-  const ping = tools.find((tool) => tool.name === 'lpza_ping');
-  assert.ok(ping, 'expected lpza_ping to be registered');
-  assert.match(ping.description ?? '', /does not call/i);
+  const names = tools.map((tool) => tool.name);
+  assert.ok(names.includes('lpza_ping'), 'expected lpza_ping');
+  assert.ok(names.includes('lpza_create_client'), 'expected lpza_create_client');
+  assert.ok(names.includes('lpza_delete_draft_fee'), 'expected lpza_delete_draft_fee');
 });
 
 test('lpza_ping reports no live API', async () => {

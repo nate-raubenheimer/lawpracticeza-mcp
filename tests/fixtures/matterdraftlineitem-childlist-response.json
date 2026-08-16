@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "status": "Draft",
+      "matterdraftlineitem_uid": 13,
+      "salesagent_id": "SA__SYS_1_12291091625556",
+      "product_id": "PROD_SYS_1_94741331371456",
+      "created": "2017-11-13 16:42:45",
+      "stampdate": "2017-11-13 16:42:45",
+      "rev": 0,
+      "taxtype_uid": "TT_001",
+      "qty": 1,
+      "matterdraftlineitem_name": "Registration of Mortgage Bond",
+      "matter_id": "MTR_API_1_61355827191366",
+      "salesinvoice_uid": null,
+      "unitprice": "4600.0000",
+      "trantotal": "5244.00",
+      "date": "2017-11-13 16:42:45",
+      "tax": "644.00",
+      "customer_id": "CUST_API_1_39321029271287",
+      "minutes": null,
+      "login_uid": "LGN_SYS_1_20713181404328",
+      "currency_uid": "ZAR",
+      "salescreditnote_uid": null
+    }
+  ],
+  "results": 1
+}

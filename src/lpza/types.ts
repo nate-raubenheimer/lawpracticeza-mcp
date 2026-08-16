@@ -198,3 +198,46 @@ export interface AccessStatusLoggedOut {
 }
 
 export type AccessStatus = AccessStatusLoggedIn | AccessStatusLoggedOut;
+
+/** `customer.insert` / `matter.insert` success payload */
+export interface InsertResponse {
+  id: string;
+  success: boolean;
+}
+
+/** `matter.update` success payload */
+export interface UpdateResponse {
+  id: string;
+  success: boolean;
+  recordcount: number;
+}
+
+/** `matter.detail` wrapper */
+export interface DetailResponse<T> {
+  data: T;
+}
+
+/** `matterset.createtransfer` success payload */
+export interface CreateTransferResponse {
+  seller_matter_id: string;
+  buyer_matter_id: string;
+  matterset_uid: string;
+}
+
+/** `matterdraftlineitem.childlist` success payload */
+export interface ChildListResponse<T = MatterDraftLineItem> {
+  data: T[];
+  results: number;
+}
+
+/** `matterdraftlineitem.upsert` success payload */
+export interface UpsertDraftFeeResponse {
+  uid: number;
+  success: boolean;
+  detail: Record<string, unknown>;
+}
+
+/** `matterdraftlineitem.quickdelete` success payload */
+export interface QuickDeleteResponse {
+  numdeleted: number;
+}

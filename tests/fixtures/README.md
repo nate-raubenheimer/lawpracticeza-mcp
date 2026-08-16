@@ -15,5 +15,6 @@ Contract JSON copied from the [LawPracticeZA API guide](https://lawpracticeza.co
 | `matterdraftlineitem-childlist-response.json` | `matterdraftlineitem.childlist` response |
 | `matterdraftlineitem-upsert-response.json` | `matterdraftlineitem.upsert` response |
 | `matterdraftlineitem-quickdelete-response.json` | `matterdraftlineitem.quickdelete` response |
+| `company-detail-response.json` | `company.detail` with positional `only` |
 
 Tests mock HTTP and load these fixtures — no live credentials required.

@@ -21,7 +21,9 @@ Package manager is **npm**. Node 20+. Official MCP SDK v2 (`@modelcontextprotoco
 | `src/index.ts` | stdio entry (`serveStdio`) |
 | `src/server.ts` | `createServer()` factory |
 | `src/lpza/` | HTTP client (`LpzaClient`, auth, errors, schema types) |
-| `src/tools/` | MCP tools (ping, client/matter/transfer/WIP writes) |
+| `src/tools/` | MCP tools (ping, client/matter/transfer/WIP writes, `lpza_api_call`) |
+| `src/resources/` | MCP resources (`lpza://firm`, `lpza://schema-notes`) |
+| `src/prompts/` | Workflow prompts (fee posting, invoice matter) |
 | `tests/fixtures/` | API-guide JSON (later tickets) |
 
 ## Rules (also in `.cursor/rules/`)

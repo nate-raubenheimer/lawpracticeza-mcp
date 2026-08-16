@@ -4,7 +4,7 @@
 
 MCP (Model Context Protocol) server for [LawPracticeZA](https://lawpracticeza.com), South African legal practice software. It exposes curated tools for clients, matters, WIP fees, billing, and accounting — not a 1:1 dump of every undocumented `object`/`method`.
 
-The typed HTTP client (`src/lpza/`) and write tools for clients, matters, transfers, and WIP are implemented with fixture-backed tests. **Live LawPracticeZA calls require credentials** (`LPZA_DATABASE`, `LPZA_LOGIN_CODE`, `LPZA_PASSWORD`); without them, write tools return a configuration error.
+The typed HTTP client (`src/lpza/`), write tools, the advanced `lpza_api_call` escape hatch, MCP resources, and workflow prompts are implemented with fixture-backed tests. **Live LawPracticeZA calls require credentials** (`LPZA_DATABASE`, `LPZA_LOGIN_CODE`, `LPZA_PASSWORD`); without them, tools and the `lpza://firm` resource return a configuration error (schema notes work without credentials).
 
 - API guide: <https://lawpracticeza.com/docs/api_guide.html>
 - Schema: <https://lawpracticeza.com/docs/schema.html>
@@ -14,6 +14,50 @@ The typed HTTP client (`src/lpza/`) and write tools for clients, matters, transf
 
 - Node.js 20 or later
 - npm
+
+## Install (Cursor)
+
+Add to your Cursor MCP config (`.cursor/mcp.json` or **Settings → MCP**):
+
+```json
+{
+  "mcpServers": {
+    "lawpracticeza": {
+      "command": "npx",
+      "args": ["-y", "tsx", "/absolute/path/to/lawpracticeza-mcp/src/index.ts"],
+      "env": {
+        "LPZA_DATABASE": "your-firm-database",
+        "LPZA_LOGIN_CODE": "your-api-login",
+        "LPZA_PASSWORD": "your-api-password"
+      }
+    }
+  }
+}
+```
+
+Use the clone path on your machine. Optional `LPZA_BASE_URL` defaults to `https://lawpracticeza.com/api`. There is **no live LawPracticeZA access** until all three `LPZA_*` credentials are set.
+
+## Install (Claude Desktop)
+
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or the equivalent Claude Desktop config on your OS:
+
+```json
+{
+  "mcpServers": {
+    "lawpracticeza": {
+      "command": "npx",
+      "args": ["-y", "tsx", "/absolute/path/to/lawpracticeza-mcp/src/index.ts"],
+      "env": {
+        "LPZA_DATABASE": "your-firm-database",
+        "LPZA_LOGIN_CODE": "your-api-login",
+        "LPZA_PASSWORD": "your-api-password"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Desktop after saving. Logs from the server go to stderr; stdout is reserved for MCP JSON-RPC.
 
 ## Run
 
@@ -71,8 +115,23 @@ The script calls `access.login` and `access.status` and prints only non-sensitiv
 | `lpza_list_unbilled` | `matterdraftlineitem.childlist` | WIP draft fees for a matter |
 | `lpza_upsert_draft_fee` | `matterdraftlineitem.upsert` | Caller supplies `unitprice` / `tax` / `trantotal` |
 | `lpza_delete_draft_fee` | `matterdraftlineitem.quickdelete` | Requires `confirm: true` |
+| `lpza_api_call` | any `object`/`method` | **Advanced** escape hatch through `LpzaClient`; caller supplies params and VAT |
 
-Planned (not in this release): session/lookup reads, billing with confirm gates, accounting reads, and `lpza_api_call`.
+Planned (not in this release): session/lookup reads, billing with confirm gates, and accounting reads as curated tools.
+
+## MCP resources
+
+| URI | Source | Notes |
+| --- | --- | --- |
+| `lpza://firm` | `company.detail/only` | Firm name, VAT flag, contact info; requires credentials |
+| `lpza://schema-notes` | static | API guide / schema pointers and curated-tool map |
+
+## MCP prompts
+
+| Prompt | Purpose |
+| --- | --- |
+| `lpza_fee_posting` | List WIP → upsert draft fees with caller-supplied VAT |
+| `lpza_invoice_matter` | Review WIP → `matter.bill` → optional `salesinvoice.send` via `lpza_api_call` |
 
 ## Development
 
@@ -93,11 +152,11 @@ CI runs typecheck and tests on push and pull request to `main`.
 | `errors.ts` | Typed errors for HTTP 200 / 403 / 406 / 500 |
 | `types.ts` | Schema types: `customer`, `matter`, `matterdraftlineitem`, `product`, etc. |
 
-Fixture tests in `tests/lpza-client.test.ts` and `tests/write-tools.test.ts` mock HTTP — no live credentials required.
+Fixture tests in `tests/lpza-client.test.ts`, `tests/write-tools.test.ts`, and `tests/api-call.test.ts` mock HTTP — no live credentials required.
 
 ## Limits
 
-- Without env credentials, write tools refuse with a configuration error (no live session).
+- Without env credentials, write tools and `lpza://firm` refuse with a configuration error (no live session). `lpza://schema-notes` works without credentials.
 - Trust/investment **write** operations are out of scope unless the official guide documents them. Do not invent them.
 - Do not hardcode VAT at 14% (2017 examples) or 15%. Callers supply amounts.
 - Remote / HTTP MCP hosting is out of scope for v1 (stdio only: Cursor, Claude Desktop).

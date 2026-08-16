@@ -2,6 +2,8 @@ import { McpServer } from '@modelcontextprotocol/server';
 
 import { credentialsFromEnv, LpzaClient, DEFAULT_LPZA_BASE_URL } from './lpza/index.js';
 import { SERVER_NAME, SERVER_VERSION } from './meta';
+import { registerPrompts } from './prompts/index.js';
+import { registerResources } from './resources/index.js';
 import { registerTools } from './tools/index.js';
 
 export { SERVER_NAME, SERVER_VERSION };
@@ -24,5 +26,7 @@ export function createServer(): McpServer {
     : undefined;
 
   registerTools(server, client);
+  registerResources(server, client);
+  registerPrompts(server);
   return server;
 }

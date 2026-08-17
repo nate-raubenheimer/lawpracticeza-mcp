@@ -24,8 +24,10 @@ after(async () => {
   await client.close();
 });
 
-test('stdio server advertises lpza_ping and read tools', async () => {
+test('stdio server advertises lpza_ping, read tools, and write tools', async () => {
   const { tools } = await client.listTools();
+  const names = tools.map((tool) => tool.name);
+
   const ping = tools.find((tool) => tool.name === 'lpza_ping');
   assert.ok(ping, 'expected lpza_ping to be registered');
   assert.match(ping.description ?? '', /does not call/i);
@@ -45,11 +47,11 @@ test('stdio server advertises lpza_ping and read tools', async () => {
     'lpza_matter_business_entries',
   ];
   for (const name of readToolNames) {
-    assert.ok(
-      tools.some((tool) => tool.name === name),
-      `expected ${name} to be registered`,
-    );
+    assert.ok(names.includes(name), `expected ${name} to be registered`);
   }
+
+  assert.ok(names.includes('lpza_create_client'), 'expected lpza_create_client');
+  assert.ok(names.includes('lpza_delete_draft_fee'), 'expected lpza_delete_draft_fee');
 });
 
 test('lpza_status without credentials reports credentials_missing', async () => {

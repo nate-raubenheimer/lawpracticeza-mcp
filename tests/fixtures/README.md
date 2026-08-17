@@ -10,6 +10,14 @@ Contract JSON copied from the [LawPracticeZA API guide](https://lawpracticeza.co
 | `company-detail-only.json` | `company.detail/only` firm details response |
 | `matter-statement2.json` | Representative `matter.statement2` response (subset of guide example) |
 | `matter-statement3.json` | `matter.statement3` business entries response |
+| `customer-insert-response.json` | `customer.insert` response |
+| `matter-insert-response.json` | `matter.insert` response |
+| `matter-detail-response.json` | `matter.detail` with `lookup=""` |
+| `matter-update-response.json` | `matter.update` response |
+| `matterset-createtransfer-response.json` | `matterset.createtransfer` response |
+| `matterdraftlineitem-childlist-response.json` | `matterdraftlineitem.childlist` response |
+| `matterdraftlineitem-upsert-response.json` | `matterdraftlineitem.upsert` response |
+| `matterdraftlineitem-quickdelete-response.json` | `matterdraftlineitem.quickdelete` response |
 
 Tests mock HTTP and load these fixtures — no live credentials required.
 

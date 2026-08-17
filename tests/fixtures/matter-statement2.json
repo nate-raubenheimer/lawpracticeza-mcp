@@ -1,0 +1,74 @@
+{
+  "customer": {
+    "customer_id": "CUST_API_1_62114584447723",
+    "customer_code": "Buyer_K1234/T001_64518",
+    "customer_name": "Carl Bartlett",
+    "department_id": "DEPT__SYS_1_24294194765458",
+    "department_name": "Conveyancing"
+  },
+  "startdate": "1969-11-30",
+  "stopdate": "2018-05-30",
+  "database": "VUKA",
+  "company": {
+    "company_id": "COMP_SYS_1_22627470809605",
+    "company_name": "VUKA",
+    "company_code": "ABCLaw",
+    "vatflag": "E",
+    "vatnumber": "23476283746"
+  },
+  "matters": [
+    {
+      "matter_id": "MTR_API_1_50521349608080",
+      "matter_code": "Matter_asdasdasdasd1_Buyer_64518",
+      "matter_name": "PROPERTY and ERF 37000 MITCHELLS PLAIN",
+      "customer_id": "CUST_API_1_62114584447723",
+      "B": {
+        "currency_uids": ["ZAR"],
+        "closingbalance": {
+          "ZAR": "0.00",
+          "ZAR_display": "R0.00"
+        },
+        "openingbalance": {
+          "ZAR": "0.00",
+          "ZAR_display": "R0.00"
+        },
+        "rows": []
+      },
+      "T": {
+        "currency_uids": ["ZAR"],
+        "closingbalance": {
+          "ZAR": "-383000.00",
+          "ZAR_display": "-R383,000.00"
+        },
+        "openingbalance": {
+          "ZAR": "0.00",
+          "ZAR_display": "R0.00"
+        },
+        "rows": [
+          {
+            "reference": "TR1004",
+            "date": "2018-05-28",
+            "narration": "Transfer Duty Paid",
+            "object": "trustreceipt",
+            "bticode": "T",
+            "amount": "-383000.00",
+            "currency_uid": "ZAR"
+          }
+        ]
+      },
+      "I": {
+        "currency_uids": ["ZAR"],
+        "closingbalance": {
+          "ZAR": "0.00",
+          "ZAR_display": "R0.00"
+        },
+        "openingbalance": {
+          "ZAR": "0.00",
+          "ZAR_display": "R0.00"
+        },
+        "rows": []
+      }
+    }
+  ],
+  "statementdate": "2018-05-29"
+}

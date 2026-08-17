@@ -1,0 +1,42 @@
+{
+  "data": [
+    {
+      "reference": "INV1002",
+      "date": "2018-04-13",
+      "salesinvoice_salesinvoice_uid": "SI__API_1_37440926887645",
+      "narration": "Invoice",
+      "object_display": "Invoice",
+      "login_uid": "LGN_SYS_1_20713181404328",
+      "description": "Invoice",
+      "staff_id": null,
+      "supplier_id": null,
+      "amount_neg_display": "-R1,368.00",
+      "accountentry_uid": 103,
+      "object_name": "Invoice",
+      "amount_display": "R5,515.09",
+      "matter_id": "MTR_SYS_1_20872615341588",
+      "customer_id": "CUST_SYS_1_10989112001592",
+      "sent": 0,
+      "department_id": "DEPT__SYS_1_82637389569365",
+      "reversaluid": null,
+      "account_id": "ACC_SYS_1_89892334896025",
+      "object": "salesinvoice",
+      "accum_ZAR": "5515.09",
+      "parentuid": "SI__API_1_37440926887645",
+      "accum_ZAR_display": "R5,515.09",
+      "accountentry_name": "Advocates account: JJ Smith for opinion on classified documents.",
+      "salesagent_id": "SA__SYS_1_51422332387169",
+      "product_id": null,
+      "salesinvoice_salesinvoice_name": "INV1002",
+      "stampdate": "2018-04-13 12:13:09",
+      "journalentry_name": null,
+      "taxtype_uid": null,
+      "voucherdate": "2018-04-13",
+      "objectuid": "SI__API_1_37440926887645",
+      "amount": "5515.09",
+      "bticode": "B",
+      "salesinvoicelineitem_name": "Invoice",
+      "currency_uid": "ZAR"
+    }
+  ]
+}

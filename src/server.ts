@@ -7,7 +7,7 @@ import { registerTools } from './tools/index.js';
 export { SERVER_NAME, SERVER_VERSION };
 
 /**
- * Build an MCP server instance with curated LawPracticeZA tools.
+ * Build an MCP server instance with curated LawPracticeZA read and write tools.
  */
 export function createServer(): McpServer {
   const server = new McpServer({
